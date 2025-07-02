@@ -13,7 +13,7 @@ import { useRef } from "react";
 
 const Testimonials = () => {
   const plugin = useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
+    Autoplay({ delay: 3000, stopOnInteraction: true })
   );
 
   const testimonials = [

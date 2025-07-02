@@ -60,6 +60,8 @@ const Portfolio = () => {
 
   const handleCardClick = (route: string) => {
     navigate(route);
+    // Scroll to top when navigating to new page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
