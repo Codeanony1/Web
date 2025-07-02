@@ -2,8 +2,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Portfolio = () => {
+  const navigate = useNavigate();
+
   const projects = [
     {
       title: "E-commerce Platform",
@@ -11,6 +14,7 @@ const Portfolio = () => {
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
       category: "Web Development",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      route: "/portfolio/e-commerce-platform"
     },
     {
       title: "Mobile Banking App",
@@ -18,6 +22,7 @@ const Portfolio = () => {
       image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop",
       category: "Mobile Development",
       technologies: ["React Native", "Firebase", "Biometrics"],
+      route: "/portfolio/mobile-banking-app"
     },
     {
       title: "Dashboard Analytics",
@@ -25,6 +30,7 @@ const Portfolio = () => {
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
       category: "Web Development",
       technologies: ["Vue.js", "D3.js", "Python", "PostgreSQL"],
+      route: "/portfolio/dashboard-analytics"
     },
     {
       title: "Social Media Platform",
@@ -32,6 +38,7 @@ const Portfolio = () => {
       image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop",
       category: "Full Stack",
       technologies: ["Next.js", "Socket.io", "Redis", "AWS"],
+      route: "/portfolio/social-media-platform"
     },
     {
       title: "Healthcare Management",
@@ -39,6 +46,7 @@ const Portfolio = () => {
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=500&h=300&fit=crop",
       category: "Web Development",
       technologies: ["Angular", "Spring Boot", "MySQL"],
+      route: "/portfolio/healthcare-management"
     },
     {
       title: "AI Chatbot Platform",
@@ -46,8 +54,13 @@ const Portfolio = () => {
       image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=500&h=300&fit=crop",
       category: "AI/ML",
       technologies: ["Python", "TensorFlow", "Flask", "NLP"],
+      route: "/portfolio/ai-chatbot-platform"
     },
   ];
+
+  const handleCardClick = (route: string) => {
+    navigate(route);
+  };
 
   return (
     <section id="portfolio" className="py-20 bg-gray-50">
@@ -65,7 +78,8 @@ const Portfolio = () => {
           {projects.map((project, index) => (
             <Card 
               key={index} 
-              className="group overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg"
+              className="group overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-lg cursor-pointer"
+              onClick={() => handleCardClick(project.route)}
             >
               <div className="relative overflow-hidden">
                 <img 
@@ -76,11 +90,27 @@ const Portfolio = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
                   <div className="flex space-x-2">
-                    <Button size="sm" variant="secondary" className="flex-1">
+                    <Button 
+                      size="sm" 
+                      variant="secondary" 
+                      className="flex-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCardClick(project.route);
+                      }}
+                    >
                       <ExternalLink className="h-4 w-4 mr-1" />
-                      Live Demo
+                      View Project
                     </Button>
-                    <Button size="sm" variant="secondary" className="flex-1">
+                    <Button 
+                      size="sm" 
+                      variant="secondary" 
+                      className="flex-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Handle GitHub link
+                      }}
+                    >
                       <Github className="h-4 w-4 mr-1" />
                       Code
                     </Button>
